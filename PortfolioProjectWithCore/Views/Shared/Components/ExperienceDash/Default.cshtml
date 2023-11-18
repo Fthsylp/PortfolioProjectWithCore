@@ -1,0 +1,53 @@
+﻿@using EntityLayer.Concrete
+@model List<Experience>
+@{
+    int number = 1;
+}
+
+<div class="col-xl-6">
+    <div class="card">
+        <div class="card-header border-0">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="mb-0">Social traffic</h3>
+                </div>
+                <div class="col text-right">
+                    <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <!-- Projects table -->
+            <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Job Title</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">
+                                 @number
+                            </th>
+                            <td>
+                                @item.Name
+                            </td>
+                            <td>
+                                @item.JobTitle
+                            </td>
+                            <td>
+                                @item.Date
+                            </td>
+                        </tr>
+                        number++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

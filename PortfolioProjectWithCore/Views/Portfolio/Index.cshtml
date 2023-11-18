@@ -1,0 +1,62 @@
+﻿@using EntityLayer.Concrete
+@model List<Portfolio>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card-header border-0">
+    <h3 class="mb-0">Admin Control Table</h3>
+</div>
+<style>
+    .table th,
+    .table td 
+    span
+    {
+        font-size: 13px; /* İstediğin boyutu burada belirleyebilirsin */
+    }
+</style>
+
+<div class="table-responsive">
+    <table class="table align-items-center table-flush">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col" class="sort">#</th>
+                <th scope="col" class="sort" data-sort="name">Project Name</th>
+                <th scope="col">Project Link</th>
+                <th scope="col" class="sort" data-sort="completion">Edit Project</th>
+                <th scope="col" class="sort" data-sort="completion">Delete Project</th>
+            </tr>
+        </thead>
+        <tbody class="list">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>@item.PortfolioID</th>
+                    <td scope="row">
+                        <div class="media align-items-center">
+                            <img class="avatar rounded-circle mr-3" style="height:50px;" src="@item.ImageUrl" />
+                            <div class="media-body">
+                                <span class="name mb-0 text-sm">@item.Name</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="badge badge-dot mr-4">
+                            <i class="bg-warning"></i>
+                            <span class="status">@item.DirectionLink</span>
+                        </span>
+                    </td>
+                    <td>
+                        <a href="/Portfolio/EditPortfolio/@item.PortfolioID" class="btn btn-sm btn-neutral">Edit</a>
+                    </td>
+                    <td>
+                        <a href="/Portfolio/DeletePortfolio/@item.PortfolioID" class="btn btn-sm btn-neutral">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="m-2">
+        <a href="/Portfolio/AddPortfolio/" class="btn btn-md btn-neutral">Add New Portfolio</a>
+    </div>
+</div>

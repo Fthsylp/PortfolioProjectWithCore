@@ -1,0 +1,42 @@
+﻿@model EntityLayer.Concrete.Skill
+
+@{
+    ViewData["Title"] = "AddSkill";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    label {
+        font-size: 13px; /* veya istediğiniz boyut */
+    }
+    .field-validation-error {
+        color: #dc3545; /* Red color for error messages */
+        font-size: 13px; /* Adjust the font size */
+        margin-top: 5px; /* Add some space above the error message */
+    }
+</style>
+<div class="Container">
+    <div class="card-header">
+        <h3 class="mb-0">New Skill Add Page</h3>
+    </div>
+
+    <form class="p-3" method="post">
+        <div class="form-group">
+            @Html.Label("Skill Name")
+            @Html.TextBoxFor(x=>x.Title, new {@class = "form-control"})
+            @Html.ValidationMessageFor(x=>x.Title)
+        </div>
+
+        <div class="form-group">
+            <label for="skillRate">Skill Profession Rate</label>
+            <input type="text" name="Value" id="skillRate" class="form-control" />
+            @Html.ValidationMessageFor(x=>x.Value)
+        </div>
+
+        <div class="mt-3">
+            <button class="btn btn-md btn-primary">Save Skill</button>
+        </div>
+    </form>
+
+</div>
+
+@* <input type="text" name="Title" id="skillName" class="form-control" /> *@

@@ -1,0 +1,65 @@
+﻿@model EntityLayer.Concrete.About
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    label {
+        font-size: 13px; /* veya istediğiniz boyut */
+    }
+
+    .field-validation-error {
+        color: #dc3545; /* Red color for error messages */
+        font-size: 13px; /* Adjust the font size */
+        margin-top: 5px; /* Add some space above the error message */
+    }
+</style>
+<div class="Container">
+    <div class="card-header">
+        <h3 class="mb-0">Edit About Page</h3>
+    </div>
+
+    @using (Html.BeginForm("Index", "About", FormMethod.Post, new { @class = "p-3" }))
+    {
+        @Html.HiddenFor(x=>x.AboutId)
+
+        @Html.Label("Title")
+        @Html.TextBoxFor(x => x.Title , new {@class = "form-control"})
+        @Html.ValidationMessageFor(x=>x.Title)
+        <br />
+
+        @Html.Label("Descrption")
+        @Html.TextBoxFor(x => x.Description , new {@class = "form-control"})
+        @Html.ValidationMessageFor(x=>x.Description)
+
+        @Html.Label("Age")
+        @Html.TextBoxFor(x => x.Age , new {@class = "form-control"})
+        @Html.ValidationMessageFor(x=>x.Age)
+
+        @Html.Label("Mail")
+        @Html.TextBoxFor(x => x.Mail , new {@class = "form-control"})
+        @Html.ValidationMessageFor(x=>x.Mail)
+
+        @Html.Label("Phone")
+        @Html.TextBoxFor(x => x.Phone , new {@class = "form-control"})
+        @Html.ValidationMessageFor(x=>x.Phone)
+
+        @Html.Label("Adress")
+        @Html.TextBoxFor(x => x.Address , new {@class = "form-control"})
+        @Html.ValidationMessageFor(x=>x.Address)
+
+        <label for="CoverImage">Image</label>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="CoverImage" name="ImageUrl" onchange="displayImagePreview()">
+            <label class="custom-file-label" for="CoverImage" id="fileLabel">@Model.ImageUrl</label>
+            @Html.ValidationMessageFor(x => x.ImageUrl)
+        </div>
+        <div id="imagePreview" class="mt-2"></div>
+
+        <div class="mt-3">
+            <button class="btn btn-md btn-primary">Edit About</button>
+        </div>
+    }
+
+</div>

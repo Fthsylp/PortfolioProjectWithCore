@@ -1,0 +1,45 @@
+﻿@model EntityLayer.Concrete.Feature
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    label {
+        font-size: 13px; /* veya istediğiniz boyut */
+    }
+
+    .field-validation-error {
+        color: #dc3545; /* Red color for error messages */
+        font-size: 13px; /* Adjust the font size */
+        margin-top: 5px; /* Add some space above the error message */
+    }
+</style>
+<div class="Container">
+    <div class="card-header">
+        <h3 class="mb-0">Edit Feature Page</h3>
+    </div>
+
+    @using (Html.BeginForm("Index", "Feature", FormMethod.Post, new { @class = "p-3" }))
+    {
+        @Html.HiddenFor(x=>x.FeatureID)
+
+        @Html.Label("Header")
+        @Html.TextBoxFor(x => x.Header , new {@class = "form-control"})
+        @Html.ValidationMessageFor(x=>x.Header)
+        <br />
+
+        @Html.Label("Name")
+        @Html.TextBoxFor(x => x.Name , new {@class = "form-control"})
+        @Html.ValidationMessageFor(x=>x.Name)
+
+        @Html.Label("Title")
+        @Html.TextBoxFor(x => x.Title , new {@class = "form-control"})
+        @Html.ValidationMessageFor(x=>x.Title)
+
+        <div class="mt-3">
+            <button class="btn btn-md btn-primary">Edit Feature</button>
+        </div>
+    }
+
+</div>

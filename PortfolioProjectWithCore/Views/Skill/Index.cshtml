@@ -1,0 +1,62 @@
+﻿@using EntityLayer.Concrete
+@model List<Skill>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card-header border-0">
+    <h3 class="mb-0">Skill Control Table</h3>
+</div>
+<!-- Light table -->
+<div class="table-responsive">
+    <table class="table align-items-center table-flush">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col" class="sort" data-sort="name">#</th>
+                <th scope="col" class="sort" data-sort="budget">Title</th>
+                <th scope="col" class="sort" data-sort="status">Rate</th>
+                <th scope="col" class="sort">Edit</th>
+                <th scope="col" class="sort" data-sort="completion">Delete</th>
+            </tr>
+        </thead>
+        <tbody class="list">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        @item.SkillId
+                    </th>
+                    <td class="budget">
+                        @item.Title
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <span class="completion mr-2">@item.Value%</span>
+                            <div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-info" role="progressbar" aria-valuenow="@item.Value" aria-valuemin="0" aria-valuemax="100" style="width: @item.Value%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <a href="/Skill/EditSkill/@item.SkillId" class="btn btn-sm btn-neutral">Edit</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <a href="/Skill/DeleteSkill/@item.SkillId" class="btn btn-sm btn-neutral">Delete</a>
+                        </div>
+                    </td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="m-2">
+        <a href="/Skill/AddSkill/" class="btn btn-md btn-neutral">Add New Skill</a>
+    </div>
+</div>

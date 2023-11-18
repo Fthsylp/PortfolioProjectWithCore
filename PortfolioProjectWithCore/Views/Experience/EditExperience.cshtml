@@ -1,0 +1,88 @@
+﻿@model EntityLayer.Concrete.Experience
+
+@{
+    ViewData["Title"] = "EditExperience";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    #imagePreview img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+    }
+
+    label {
+        font-size: 13px;
+    }
+    .field-validation-error {
+        color: #dc3545; /* Red color for error messages */
+        font-size: 13px; /* Adjust the font size */
+        margin-top: 5px; /* Add some space above the error message */
+    }
+</style>
+
+<div class="Container">
+    <div class="card-header">
+        <h3 class="mb-0">Experience Edit Page</h3>
+    </div>
+
+    @using (Html.BeginForm("EditExperience", "Experience", FormMethod.Post, new { @class = "p-3", enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(x=>x.ExperienceID)
+
+        @Html.Label("Experience Name")
+        @Html.TextBoxFor(x=>x.Name, new {@class ="form-control mb-2"})
+        @Html.ValidationMessageFor(x=>x.Name)
+
+        @Html.Label("Date")
+        @Html.TextBoxFor(x=>x.Date, new {@class = "form-control mb-2"})
+        @Html.ValidationMessageFor(x=>x.Date)
+
+        @Html.Label("Job Title")
+        @Html.TextBoxFor(x=>x.JobTitle, new {@class = "form-control mb-2"})
+        @Html.ValidationMessageFor(x=>x.JobTitle)
+
+
+        <label for="CoverImage">Image</label>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="CoverImage" name="ImageUrl" onchange="displayImagePreview()">
+            <label class="custom-file-label" for="CoverImage" id="fileLabel">@Model.ImageUrl</label>
+            @Html.ValidationMessageFor(x => x.ImageUrl)
+        </div>
+        <div id="imagePreview" class="mt-2"></div>
+
+        @Html.Label("Description")
+        @Html.TextAreaFor(x => x.Description, new { @class = "form-control mb-2", rows = 5 })
+        @Html.ValidationMessageFor(x=>x.Description)
+
+        <div class="mt-3">
+            <button class="btn btn-md btn-primary">Save Experience</button>
+        </div>
+    }
+
+
+</div>
+
+
+<script>
+    function displayImagePreview() {
+        const input = document.getElementById('CoverImage');
+        const preview = document.getElementById('imagePreview');
+
+        while (preview.firstChild) {
+            preview.removeChild(preview.firstChild);
+        }
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.className = 'img-thumbnail';
+                preview.appendChild(img);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
